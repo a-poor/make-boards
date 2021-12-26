@@ -8,7 +8,13 @@ function Header({  }) {
 function CellHeader({ idx }) {
   return <> 
     <div>
-      <p>Frame: {idx}</p>
+      <span
+        style={{
+          fontFamily: "sans-serif",
+        }}
+      >
+        Frame: {idx}
+      </span>
     </div>
   </>
 }
@@ -16,6 +22,14 @@ function CellHeader({ idx }) {
 function CellImage({  }) {
   return <> 
     <div>
+      <div className="cell-image"/>
+      {/* <svg
+        viewBox='0 0 1920 1080'
+        style={{ 
+          backgroundColor: '#ccc',
+          margin: "auto",
+        }} 
+      /> */}
     </div>
   </>
 }
@@ -23,6 +37,12 @@ function CellImage({  }) {
 function CellTextInput({  }) {
   return <> 
     <div>
+      <textarea 
+        style={{ 
+          resize: "none", 
+          width: "100%",
+        }}
+      />
     </div>
   </>
 }
@@ -30,6 +50,8 @@ function CellTextInput({  }) {
 function CellButtons({  }) {
   return <> 
     <div>
+      <button>Generate</button>
+      <button>Clear</button>
     </div>
   </>
 }
@@ -53,21 +75,29 @@ function Boards({  }) {
   const getIdx = (row, col) => row * nRows + col;
 
   return <> 
-    <div className="boards">
+    <div 
+      className="boards"
+      style={{
+        margin: "auto",
+        padding: "5px",
+      }}
+    >
       <table>
-        {
-          range(nRows).map(row => (
-            <tr key={row}>
-              {
-                range(nCols).map(col => (
-                  <td key={col}>
-                    <BoardCell idx={getIdx(row, col)} />
-                  </td>
-                ))
-              }
-            </tr>
-          ))
-        }
+        <tbody>
+          {
+            range(nRows).map(row => (
+              <tr key={row}>
+                {
+                  range(nCols).map(col => (
+                    <td key={col}>
+                      <BoardCell idx={getIdx(row, col)} />
+                    </td>
+                  ))
+                }
+              </tr>
+            ))
+          }
+        </tbody>
       </table>
     </div>
   </>
