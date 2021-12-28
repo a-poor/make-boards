@@ -1,5 +1,6 @@
 import './App.css';
 
+
 function Header({  }) {
   return <>
   </>
@@ -20,16 +21,23 @@ function CellHeader({ idx }) {
 }
 
 function CellImage({  }) {
+  const factor = 20;
+
   return <> 
-    <div>
-      <div className="cell-image"/>
-      {/* <svg
-        viewBox='0 0 1920 1080'
-        style={{ 
-          backgroundColor: '#ccc',
+    <div 
+      className="cell-image"
+      style={{
+        margin: "auto",
+      }}
+    >
+      <div 
+        style={{
+          width: 16 * factor,
+          height: 9 * factor,
+          backgroundColor: "grey",
           margin: "auto",
         }} 
-      /> */}
+      />
     </div>
   </>
 }
@@ -41,6 +49,7 @@ function CellTextInput({  }) {
         style={{ 
           resize: "none", 
           width: "100%",
+          margin: "auto",
         }}
       />
     </div>
@@ -58,7 +67,13 @@ function CellButtons({  }) {
 
 function BoardCell({ idx }) {
   return <> 
-    <div className="board-cell">
+    <div 
+      className="board-cell"
+      style={{
+        width: "300px",
+        margin: "15px",
+      }}
+    >
       <CellHeader idx={idx} />
       <CellImage />
       <CellTextInput />
@@ -68,37 +83,23 @@ function BoardCell({ idx }) {
 }
 
 function Boards({  }) {
-  const nRows = 3;
-  const nCols = 3;
-
+  const n = 6;
   const range = n => new Array(n).fill(null).map((_, i) => i);
-  const getIdx = (row, col) => row * nRows + col;
 
   return <> 
     <div 
       className="boards"
       style={{
         margin: "auto",
+        width: "95%",
         padding: "5px",
+        display: "flex",
+        flexWrap: "wrap",
       }}
     >
-      <table>
-        <tbody>
-          {
-            range(nRows).map(row => (
-              <tr key={row}>
-                {
-                  range(nCols).map(col => (
-                    <td key={col}>
-                      <BoardCell idx={getIdx(row, col)} />
-                    </td>
-                  ))
-                }
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
+      {
+        range(n).map(i => <BoardCell idx={i+1} />)
+      }
     </div>
   </>
 }
